@@ -1,0 +1,9 @@
+if [[ -f $HOME/.Xresources ]]; then
+    xrdb -merge -I$HOME $HOME/.Xresources
+fi
+
+case $(hostname) in
+    pergamon) xrandr --output DisplayPort-0 --mode 2560x1440 --rate 144
+esac
+
+exec dbus-launch --exit-with-session awesome
