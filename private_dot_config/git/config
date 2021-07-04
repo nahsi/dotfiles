@@ -1,0 +1,35 @@
+[user]
+    name = Anatoly Laskaris
+    email = nahsi@airmail.cc
+    signingkey = 6A155A3D8ECF430D
+
+[core]
+    autocrlf = false
+    safecrlf = true
+    pager = cat
+
+[alias]
+    co = checkout
+    cb = checkout -b
+
+    c   = commit
+    cm  = commit --message
+    cam = commit -am
+    ca  = commit --ammend
+
+    b = branch
+    bd = branch --delete --force
+
+    st = status
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[pull]
+    rebase = merges

@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+# stop here if not running interactively
+[[ $- != *i* ]] && return
+
+# source .bash_profile
+if [[ -r ~/.bash_profile ]]; then
+    source ~/.bash_profile
+fi

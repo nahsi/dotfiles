@@ -1,0 +1,64 @@
+#! /usr/bin/env bash
+
+set -o vi
+
+export PATH="${PATH}:${HOME}/.local/bin"
+
+has() {
+    [[ -z $1 ]] && return 1
+    command -v $1 > /dev/null 2>&1
+}
+
+exists() {
+    [[ -r $1 ]] || return 1
+}
+
+# init bash completions
+for p in nomad consul vault terraform packer; do
+    if has $p; then
+        complete -C $p $p
+    fi
+done
+
+# setup colors
+for f in base.theme.sh colors.theme.sh duru.theme.sh colors.sh; do
+    file="${HOME}/.local/share/bash/theme/$f"
+    exists $file && source "$file"
+done
+unset file
+
+export HISTFILE="$HOME/.cache/bash_history"
+export HISTSIZE=5000
+export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CONFIG_DATA="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+export XDG_DATA_DIRS="/usr/local/share:/usr/share:$HOME/.local/share"
+
+export PAGER="less"
+export TERMINAL="kitty"
+export EDITOR="nvim"
+export BROWSER="qutebrowser"
+
+# use ncurses pinentry for SSH logins
+export GPG_TTY=$(tty)
+if [[ -n "$SSH_CONNECTION" ]]; then
+    export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
+
+export NNN_OPENER="$XDG_CONFIG_HOME/nnn/plugins/nuke"
+export GUI=1 # enable GUI apps in nnn's nuke
+
+# to trust self sign certificate when using requests
+export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+
+# colorize ansible and molecule
+export PY_COLORS=1
+export ANSIBLE_FORCE_COLOR=1
+
+alias nnn="nnn -ec"
+alias www="nvim +VimwikiIndex"
+
+unset -f has
