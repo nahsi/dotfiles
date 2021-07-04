@@ -8,13 +8,13 @@ SCM_THEME_PROMPT_CLEAN=""
 venv() {
     if [[ ! -z "$VIRTUAL_ENV" ]]; then
         local env=$VIRTUAL_ENV
-        echo "${gray} in ${orange}${env##*/} "
+        echo "${gray} in ${orange}${env##*/}"
     fi
 }
 
 ssh_host() {
     if [[ ! -z "$SSH_CONNECTION" ]]; then
-        echo " at ${green}$HOSTNAME"
+        echo "${gray} at ${green}$HOSTNAME"
     fi
 }
 
