@@ -1,0 +1,5 @@
+session: work
+root: ~/
+
+windows:
+  - name: main
