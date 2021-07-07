@@ -58,6 +58,8 @@ export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 export PY_COLORS=1
 export ANSIBLE_FORCE_COLOR=1
 
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 alias nnn="nnn -ec"
 alias www="nvim +VimwikiIndex"
 
