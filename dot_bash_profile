@@ -20,8 +20,12 @@ for p in nomad consul vault terraform packer; do
     fi
 done
 
+# setup fzf
+source "/usr/share/bash-completion/completions/fzf"
+source "/usr/share/fzf/key-bindings.bash"
+
 # setup colors
-for f in base.theme.sh colors.theme.sh duru.theme.sh colors.sh; do
+for f in base.theme.sh colors.theme.sh duru.theme.sh colors.sh fzf.sh; do
     file="${HOME}/.local/share/bash/theme/$f"
     exists $file && source "$file"
 done
