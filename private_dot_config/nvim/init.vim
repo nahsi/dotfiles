@@ -123,6 +123,10 @@ call minpac#add("tpope/vim-surround")
 " better netrw
 call minpac#add("tpope/vim-vinegar")
 
+" fzf
+call minpac#add("junegunn/fzf.vim")
+call minpac#add("airblade/vim-rooter")
+
 " visuals
 call minpac#add("chriskempson/base16-vim")
 call minpac#add("itchyny/lightline.vim")
@@ -143,6 +147,31 @@ call minpac#add("https://github.com/jvirtanen/vim-hcl")
 
 " {{{ Plugin settings
 " ----------------------------------------------------------------------------
+" fzf
+map <leader>f :Files<CR>
+map <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>m :Marks<CR>
+
+" preview window up
+let g:fzf_preview_window = ["up"]
+
+" customize fzf colors to match color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.local/vimwiki'}]
 
