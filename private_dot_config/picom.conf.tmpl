@@ -1,9 +1,10 @@
-# Performance
-# backend = "glx";
+{{- if (eq .chezmoi.hostname "pergamon") -}}
+backend = "glx";
 glx-no-stencil = true;
 glx-no-rebind-pixmap = true;
 unredir-if-possible = true;
 vsync = true;
+{{- end }}
 
 # Shadow
 shadow = true;
