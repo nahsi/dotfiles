@@ -72,3 +72,6 @@ alias nnn="nnn -ec"
 alias www="nvim +VimwikiIndex"
 
 unset -f has
+
+# autostart X
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
