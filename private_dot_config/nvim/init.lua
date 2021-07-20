@@ -18,6 +18,7 @@ require('packer').startup(function()
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'airblade/vim-rooter' } -- Changes to work dir of project
   use 'RRethy/nvim-base16' -- base16 colorschemes pack
   -- statusbar in lua
@@ -29,7 +30,10 @@ require('packer').startup(function()
   use 'lukas-reineke/indent-blankline.nvim'
   -- Add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+	-- Highlight, edit, and navigate code
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	-- Collection of configurations for build in LSP
+  use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
 	use 'fatih/vim-go' -- go developement plugin
@@ -89,7 +93,8 @@ vim.o.clipboard = 'unnamed'
 
 -- Enable folding
 vim.o.foldenable = true
-vim.o.foldmethod = 'marker'
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Set colorcolumn and line highlight
 vim.o.colorcolumn = '79'
@@ -146,8 +151,18 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-  },
+	},
+	extentions = {
+		fzf = {
+		fuzzy = true,                    -- false will only do exact matching
+		override_generic_sorter = false, -- override the generic sorter
+		override_file_sorter = true,     -- override the file sorter
+		case_mode = "smart_case",
+  }
+	}
 }
+require('telescope').load_extension('fzf')
+
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
@@ -172,6 +187,16 @@ vim.api.nvim_exec(
 
 -- Y yank until the end of line
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
+
+-- Treesitter configuration
+require('nvim-treesitter.configs').setup {
+  highlight = {
+    enable = true -- false will disable the whole extension
+  },
+  indent = {
+    enable = true
+  }
+}
 
 -- Enable the following language servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
