@@ -206,6 +206,9 @@ local servers = {
 	gopls = { 
 		cmd = {'gopls'},
 		capabilities = capabilities
+	},
+	terraformls = {
+		cmd = {'terraform-ls', 'serve'}
 	}
 }
 
