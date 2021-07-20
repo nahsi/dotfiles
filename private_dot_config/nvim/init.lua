@@ -11,32 +11,43 @@ end
 
 local use = require('packer').use
 require('packer').startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-vinegar' -- Better netrw
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
+  use 'wbthomason/packer.nvim' -- package manager
+
+  use 'tpope/vim-vinegar' -- better netrw
+  use 'tpope/vim-fugitive' -- git commands in nvim
+  use 'tpope/vim-rhubarb' -- fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-  -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use { 'airblade/vim-rooter' } -- Changes to work dir of project
-  use 'RRethy/nvim-base16' -- base16 colorschemes pack
-  -- statusbar in lua
-  use {
-  'hoob3rt/lualine.nvim',
-  requires = {'kyazdani42/nvim-web-devicons'}
-  }
-  -- Add indentation guides even on blank lines
-  use 'lukas-reineke/indent-blankline.nvim'
-  -- Add git related info in the signs columns and popups
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-	-- Highlight, edit, and navigate code
+	use 'machakann/vim-sandwich' -- vim-surround alternative
+
+	-- IDE
+	-- highlight, edit, and navigate code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	-- Collection of configurations for build in LSP
+	-- collection of configurations for build in LSP
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe' -- Autocompletion plugin
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'hrsh7th/nvim-compe' -- autocompletion plugin
+  use 'L3MON4D3/LuaSnip' -- snippets plugin
 	use 'fatih/vim-go' -- go developement plugin
+
+  -- UI to select things (files, grep results, open buffers...)
+  use {
+		'nvim-telescope/telescope.nvim', 
+		requires = {
+			{ 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } 
+		}
+	}
+	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use 'airblade/vim-rooter' -- changes to work dir of project
+
+  use 'RRethy/nvim-base16' -- base16 colorschemes pack
+  use {
+		'hoob3rt/lualine.nvim', -- statusline in lua
+		requires = { 'kyazdani42/nvim-web-devicons' }
+  }
+  -- add indentation guides even on blank lines
+  use 'lukas-reineke/indent-blankline.nvim'
+  -- add git related info in the signs columns and popups
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+	use 'wfxr/minimap.vim'
 end)
 
 -- Indentation
@@ -129,6 +140,9 @@ vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
+
+-- code-minimap
+vim.g.minimap_auto_start = 0
 
 -- Gitsigns
 require('gitsigns').setup {
