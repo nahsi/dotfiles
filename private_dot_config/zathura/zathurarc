@@ -7,7 +7,7 @@
 #           ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 #
 # ----------------------------------------------------------------------------
-set font                        "Input 11"
+set font                        "Fira Mono 12"
 
 # Base16 Tomorrow Night
 # Author: Chris Kempson (http://chriskempson.com)
