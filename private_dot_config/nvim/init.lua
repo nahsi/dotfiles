@@ -191,11 +191,12 @@ vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
   highlight = {
-    enable = true, -- false will disable the whole extension
-		additional_vim_regex_highlighting = {"ansible"}
+    enable = true,
+		disable = {'yaml'}
   },
   indent = {
-    enable = true
+    enable = true,
+		disable = {'yaml'}
   },
 }
 
