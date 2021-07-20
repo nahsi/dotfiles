@@ -18,6 +18,7 @@ require('packer').startup(function()
   use 'tpope/vim-rhubarb' -- fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
 	use 'machakann/vim-sandwich' -- vim-surround alternative
+	use 'phaazon/hop.nvim' -- easymotion in lua
 
 	-- IDE
 	-- highlight, edit, and navigate code
@@ -154,6 +155,11 @@ require('gitsigns').setup {
     changedelete = { hl = 'GitGutterChange', text = '~' },
   },
 }
+
+-- hop
+require'hop'.setup()
+vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require'hop'.hint_words()<cr>", {})
+vim.api.nvim_set_keymap('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 
 -- Telescope
 require('telescope').setup {
