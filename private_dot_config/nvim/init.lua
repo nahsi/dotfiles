@@ -27,7 +27,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe' -- autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- snippets plugin
-	use 'fatih/vim-go' -- go developement plugin
+	-- use 'fatih/vim-go' -- go developement plugin
 
   -- UI to select things (files, grep results, open buffers...)
   use {
@@ -38,6 +38,7 @@ require('packer').startup(function()
 	}
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'airblade/vim-rooter' -- changes to work dir of project
+	use 'windwp/nvim-autopairs'
 
   use 'RRethy/nvim-base16' -- base16 colorschemes pack
   use {
@@ -161,6 +162,9 @@ require'hop'.setup()
 vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require'hop'.hint_words()<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 
+-- autopairs
+require('nvim-autopairs').setup()
+
 -- Telescope
 require('telescope').setup {
   defaults = {
@@ -226,12 +230,18 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = {
 	gopls = { 
-		cmd = {'gopls'},
-		capabilities = capabilities
+		cmd = {'gopls', 'serve'},
+		capabilities = capabilities,
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+				},
+			},
+			staticcheck = true,
+		},
 	},
-	terraformls = {
-		cmd = {'terraform-ls', 'serve'}
-	}
+	terraformls = {}
 }
 
 local lsp_config = require'lspconfig'
