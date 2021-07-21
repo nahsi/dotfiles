@@ -27,7 +27,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe' -- autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- snippets plugin
-	-- use 'fatih/vim-go' -- go developement plugin
+	use 'fatih/vim-go' -- go developement plugin
 
   -- UI to select things (files, grep results, open buffers...)
   use {
@@ -162,9 +162,6 @@ require'hop'.setup()
 vim.api.nvim_set_keymap('n', '<leader>h', "<cmd>lua require'hop'.hint_words()<cr>", {})
 vim.api.nvim_set_keymap('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 
--- autopairs
-require('nvim-autopairs').setup()
-
 -- Telescope
 require('telescope').setup {
   defaults = {
@@ -212,47 +209,6 @@ vim.api.nvim_exec(
 -- Y yank until the end of line
 vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 
--- Treesitter configuration
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-		disable = {'yaml'}
-  },
-  indent = {
-    enable = true,
-		disable = {'yaml'}
-  },
-}
-
--- Enable the following language servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local servers = {
-	gopls = { 
-		cmd = {'gopls', 'serve'},
-		capabilities = capabilities,
-		settings = {
-			gopls = {
-				analyses = {
-					unusedparams = true,
-				},
-			},
-			staticcheck = true,
-		},
-	},
-	terraformls = {}
-}
-
-local lsp_config = require'lspconfig'
-
-for server, config in pairs(servers) do
-		lsp_config[server].setup(config)
-end
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
 -- Compe setup
 require('compe').setup {
 	enabled = true,
@@ -273,7 +229,7 @@ require('compe').setup {
     luasnip = true,
     buffer = false,
     calc = false,
-    nvim_lua = true,
+    nvim_lua = false,
     vsnip = false,
     ultisnips = false,
   },
@@ -329,3 +285,56 @@ vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true 
 -- Map compe confirm and complete functions
 vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
 vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
+
+-- autopairs
+require('nvim-autopairs').setup({
+	check_ts = true,
+})
+require('nvim-autopairs.completion.compe').setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true -- it will auto insert `(` after select function or method item
+})
+
+-- Treesitter configuration
+require('nvim-treesitter.configs').setup {
+	autopairs = {
+		enable = true,
+	},
+  highlight = {
+    enable = true,
+		disable = {'yaml'}
+  },
+  indent = {
+    enable = true,
+		disable = {'yaml'}
+  },
+}
+
+-- Enable the following language servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local servers = {
+	gopls = { 
+		cmd = {'gopls', 'serve'},
+		capabilities = capabilities,
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+				},
+			},
+			staticcheck = true,
+		},
+	},
+	terraformls = {}
+}
+
+local lsp_config = require'lspconfig'
+
+for server, config in pairs(servers) do
+		lsp_config[server].setup(config)
+end
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
