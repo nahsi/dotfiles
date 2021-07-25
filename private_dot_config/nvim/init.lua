@@ -20,6 +20,7 @@ require('packer').startup(function()
 	use 'machakann/vim-sandwich' -- vim-surround alternative
 	use 'phaazon/hop.nvim' -- easymotion in lua
 	use 'npxbr/glow.nvim' -- preview MD in buffer
+	use 'norcalli/nvim-colorizer.lua' --  color higlighter in lua
 
 	-- IDE
 	-- highlight, edit, and navigate code
@@ -146,6 +147,9 @@ vim.g.indent_blankline_show_trailing_blankline_indent = false
 
 -- code-minimap
 vim.g.minimap_auto_start = 0
+
+-- colorizer
+require'colorizer'.setup()
 
 -- Gitsigns
 require('gitsigns').setup {
