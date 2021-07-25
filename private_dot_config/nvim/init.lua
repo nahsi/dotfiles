@@ -19,6 +19,7 @@ require('packer').startup(function()
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
 	use 'machakann/vim-sandwich' -- vim-surround alternative
 	use 'phaazon/hop.nvim' -- easymotion in lua
+	use 'npxbr/glow.nvim' -- preview MD in buffer
 
 	-- IDE
 	-- highlight, edit, and navigate code
