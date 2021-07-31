@@ -69,12 +69,13 @@ end)
 vim.o.tabstop=4
 vim.o.softtabstop=4
 vim.o.shiftwidth=4
+vim.o.expandtab=true
 
 -- Filetype specifis indentation
 local narrow = require('utils')
 narrow.create_augroup({
 	{ 
-	  'FileType yaml,hcl,rudy,tf,lua,json', 'set',
+	  'FileType yaml,hcl,rudy,tf,lua,json,xml', 'set',
 	  'tabstop=2', 'softtabstop=2', 'shiftwidth=2'
 	},
 }, 'narrow')
