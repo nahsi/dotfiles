@@ -52,6 +52,17 @@ require('packer').startup(function()
   -- add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 	use 'wfxr/minimap.vim'
+
+	-- notetaking in Zettelkasten
+	use {
+    'pyrho/nerveux.nvim',
+    requires = {
+        'nvim-lua/plenary.nvim',
+        'nvim-lua/popup.nvim',
+        'nvim-telescope/telescope.nvim',
+    },
+    config = function() require'nerveux'.setup() end,
+	}
 end)
 
 -- Indentation
@@ -189,7 +200,7 @@ require('telescope').setup {
 }
 require('telescope').load_extension('fzf')
 
---Add leader shortcuts
+-- Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
@@ -199,6 +210,13 @@ vim.api.nvim_set_keymap('n', '<leader>fd', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+
+-- nerveux
+require 'nerveux'.setup {
+	neuron_dir = "/home/nahsi/neuron",
+	virtual_titles = true,
+	create_default_mappings = true,
+}
 
 -- Highlight on yank
 vim.api.nvim_exec(
