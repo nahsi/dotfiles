@@ -4,8 +4,8 @@ c.content.autoplay = False
 c.backend = "webengine"
 c.zoom.default = "125%"
 c.completion.height = "30%"
-c.url.start_pages = ["https://home.service.syria.consul"]
-c.url.default_page = "https://home.service.syria.consul"
+c.url.start_pages = ["https://home.service.consul"]
+c.url.default_page = "https://home.service.consul"
 config.source("colors.py")
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
