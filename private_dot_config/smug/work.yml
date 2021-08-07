@@ -1,5 +1,13 @@
 session: work
 root: ~/
+env:
+  ENV: work
 
 windows:
+  - name: cnr-ansible
+    layout: main-horizontal
+    root: ~/repos/cinarra/cnr-ansible
+    commands:
+      - source ~/.virtualenvs/cinarra/ansible/bin/activate
+      - clear
   - name: main

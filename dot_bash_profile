@@ -75,3 +75,10 @@ unset -f has
 
 # autostart X
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
+
+# source variables
+case $ENV in
+    home) source ~/.local/home.env ;;
+    work) source ~/.local/work.env ;;
+    *)
+esac

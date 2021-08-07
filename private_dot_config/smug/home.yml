@@ -1,6 +1,13 @@
-session: main
-
+session: home
 root: ~/
+env:
+  ENV: home
 
 windows:
+  - name: ansible
+    layout: main-horizontal
+    root: ~/repos/homelab/ansible
+    commands:
+      - source ~/.virtualenvs/homelab/ansible/bin/activate
+      - clear
   - name: main
