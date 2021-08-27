@@ -11,28 +11,31 @@
 # -----------------------------------------------------------------------------
 gpu-api=vulkan
 hwdec=auto
-opengl-pbo=yes
 
 vulkan-async-compute=yes
 vulkan-async-transfer=yes
+{{- if (eq .chezmoi.hostname "pergamon") -}}
+opengl-pbo=yes
 
 deband=yes
 deband-iterations=4
 deband-threshold=20
 deband-grain=64
 deband-range=16
+{{- end }}
 
 dither-depth=auto
 temporal-dither=yes
 
 # Processing
 # -----------------------------------------------------------------------------
-fbo-format=rgba16hf
+{{- if (eq .chezmoi.hostname "pergamon") -}}
 scale=ewa_lanczos
 dscale=mitchell
 linear-downscaling=yes
 cscale=mitchell
 sigmoid-upscaling=yes
+{{- end }}
 
 # Colorspace
 # -----------------------------------------------------------------------------
