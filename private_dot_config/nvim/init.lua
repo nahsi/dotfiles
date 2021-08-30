@@ -53,18 +53,6 @@ require('packer').startup(function()
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 	use 'wfxr/minimap.vim'
 
-	-- notetaking in Zettelkasten
-	use {
-    'pyrho/nerveux.nvim',
-    requires = {
-        'nvim-lua/plenary.nvim',
-        'nvim-lua/popup.nvim',
-        'nvim-telescope/telescope.nvim',
-    },
-    config = function() require'nerveux'.setup() end,
-	}
-end)
-
 -- Indentation
 vim.o.tabstop=4
 vim.o.softtabstop=4
