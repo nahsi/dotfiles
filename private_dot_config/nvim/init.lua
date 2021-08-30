@@ -17,41 +17,42 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive' -- git commands in nvim
   use 'tpope/vim-rhubarb' -- fugitive-companion to interact with github
   use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-	use 'machakann/vim-sandwich' -- vim-surround alternative
-	use 'phaazon/hop.nvim' -- easymotion in lua
-	use 'npxbr/glow.nvim' -- preview MD in buffer
-	use 'norcalli/nvim-colorizer.lua' --  color higlighter in lua
+  use 'machakann/vim-sandwich' -- vim-surround alternative
+  use 'phaazon/hop.nvim' -- easymotion in lua
+  use 'npxbr/glow.nvim' -- preview MD in buffer
+  use 'norcalli/nvim-colorizer.lua' --  color higlighter in lua
 
-	-- IDE
-	-- highlight, edit, and navigate code
+  -- IDE
+  -- highlight, edit, and navigate code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	-- collection of configurations for build in LSP
+  -- collection of configurations for build in LSP
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe' -- autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- snippets plugin
-	use 'fatih/vim-go' -- go developement plugin
+  use 'fatih/vim-go' -- go developement plugin
 
   -- UI to select things (files, grep results, open buffers...)
   use {
-		'nvim-telescope/telescope.nvim', 
-		requires = {
-			{ 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } 
-		}
-	}
-	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    'nvim-telescope/telescope.nvim', 
+    requires = {
+      { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } 
+    }
+  }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'airblade/vim-rooter' -- changes to work dir of project
-	use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-autopairs'
 
   use 'RRethy/nvim-base16' -- base16 colorschemes pack
   use {
-		'hoob3rt/lualine.nvim', -- statusline in lua
-		requires = { 'kyazdani42/nvim-web-devicons' }
+    'hoob3rt/lualine.nvim', -- statusline in lua
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
   -- add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
   -- add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-	use 'wfxr/minimap.vim'
+  use 'wfxr/minimap.vim'
+end)
 
 -- Indentation
 vim.o.tabstop=4
@@ -62,10 +63,10 @@ vim.o.expandtab=true
 -- Filetype specifis indentation
 local narrow = require('utils')
 narrow.create_augroup({
-	{ 
-	  'FileType yaml,hcl,rudy,tf,lua,json,xml', 'set',
-	  'tabstop=2', 'softtabstop=2', 'shiftwidth=2'
-	},
+  { 
+    'FileType yaml,hcl,rudy,tf,lua,json,xml', 'set',
+    'tabstop=2', 'softtabstop=2', 'shiftwidth=2'
+  },
 }, 'narrow')
 
 -- Incremental live completion
@@ -177,15 +178,15 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-	},
-	extentions = {
-		fzf = {
-		fuzzy = true,                    -- false will only do exact matching
-		override_generic_sorter = false, -- override the generic sorter
-		override_file_sorter = true,     -- override the file sorter
-		case_mode = "smart_case",
+  },
+  extentions = {
+    fzf = {
+    fuzzy = true,                    -- false will only do exact matching
+    override_generic_sorter = false, -- override the generic sorter
+    override_file_sorter = true,     -- override the file sorter
+    case_mode = "smart_case",
   }
-	}
+  }
 }
 require('telescope').load_extension('fzf')
 
@@ -202,9 +203,9 @@ vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin'
 
 -- nerveux
 require 'nerveux'.setup {
-	neuron_dir = "/home/nahsi/neuron",
-	virtual_titles = true,
-	create_default_mappings = true,
+  neuron_dir = "/home/nahsi/neuron",
+  virtual_titles = true,
+  create_default_mappings = true,
 }
 
 -- Highlight on yank
@@ -223,9 +224,9 @@ vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
 
 -- Compe setup
 require('compe').setup {
-	enabled = true,
-	autocomplete = true,
-	debug = false,
+  enabled = true,
+  autocomplete = true,
+  debug = false,
   min_length = 1,
   preselect = 'disable',
   throttle_time = 80,
@@ -300,7 +301,7 @@ vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
 
 -- autopairs
 require('nvim-autopairs').setup({
-	check_ts = true,
+  check_ts = true,
 })
 require('nvim-autopairs.completion.compe').setup({
   map_cr = true, --  map <CR> on insert mode
@@ -309,16 +310,16 @@ require('nvim-autopairs.completion.compe').setup({
 
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
-	autopairs = {
-		enable = true,
-	},
+  autopairs = {
+    enable = true,
+  },
   highlight = {
     enable = true,
-		disable = {'yaml'}
+    disable = {'yaml'}
   },
   indent = {
     enable = true,
-		disable = {'yaml'}
+    disable = {'yaml'}
   },
 }
 
@@ -327,25 +328,25 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = {
-	gopls = { 
-		cmd = {'gopls', 'serve'},
-		capabilities = capabilities,
-		settings = {
-			gopls = {
-				analyses = {
-					unusedparams = true,
-				},
-			},
-			staticcheck = true,
-		},
-	},
-	terraformls = {}
+  gopls = { 
+    cmd = {'gopls', 'serve'},
+    capabilities = capabilities,
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+      },
+      staticcheck = true,
+    },
+  },
+  terraformls = {}
 }
 
 local lsp_config = require'lspconfig'
 
 for server, config in pairs(servers) do
-		lsp_config[server].setup(config)
+    lsp_config[server].setup(config)
 end
 
 -- Set completeopt to have a better completion experience
