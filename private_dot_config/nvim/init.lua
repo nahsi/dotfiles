@@ -201,13 +201,6 @@ vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>fo', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
--- nerveux
-require 'nerveux'.setup {
-  neuron_dir = "/home/nahsi/neuron",
-  virtual_titles = true,
-  create_default_mappings = true,
-}
-
 -- Highlight on yank
 vim.api.nvim_exec(
   [[
