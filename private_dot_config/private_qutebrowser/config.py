@@ -10,6 +10,9 @@ config.source("colors.py")
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
 
+# bokmarklets
+c.aliases.update({ 'link': 'open https://links.service.consul/bookmarks/new?url={url}&auto_close'})
+
 # fonts
 c.fonts.default_family = ["Fira Sans", "Roboto", "Noto Sans"]
 c.fonts.default_size = "10pt"

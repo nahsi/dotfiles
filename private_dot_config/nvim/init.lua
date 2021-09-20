@@ -55,19 +55,10 @@ require('packer').startup(function()
 end)
 
 -- Indentation
-vim.o.tabstop=4
-vim.o.softtabstop=4
-vim.o.shiftwidth=4
+vim.o.tabstop=2
+vim.o.softtabstop=2
+vim.o.shiftwidth=2
 vim.o.expandtab=true
-
--- Filetype specifis indentation
-local narrow = require('utils')
-narrow.create_augroup({
-  { 
-    'FileType yaml,hcl,rudy,tf,lua,json,xml', 'set',
-    'tabstop=2', 'softtabstop=2', 'shiftwidth=2'
-  },
-}, 'narrow')
 
 -- Incremental live completion
 vim.o.inccommand = 'nosplit'
@@ -343,4 +334,4 @@ for server, config in pairs(servers) do
 end
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menuone,noselect,preview'
