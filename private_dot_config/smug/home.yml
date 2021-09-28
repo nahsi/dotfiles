@@ -10,4 +10,7 @@ windows:
     commands:
       - source ~/.virtualenvs/homelab/ansible/bin/activate
       - clear
+  - name: nomad
+    layout: main-horizontal
+    root: ~/repos/homelab/nomad
   - name: main
