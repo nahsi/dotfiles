@@ -29,7 +29,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe' -- autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- snippets plugin
-  use 'fatih/vim-go' -- go developement plugin
+  -- use 'fatih/vim-go' -- go developement plugin
 
   -- UI to select things (files, grep results, open buffers...)
   use {
