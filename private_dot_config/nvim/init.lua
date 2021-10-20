@@ -54,6 +54,13 @@ require('packer').startup(function()
   -- add git related info in the signs columns and popups
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use 'wfxr/minimap.vim'
+
+  -- neorg
+  use { "nvim-neorg/neorg",
+    requires = { 
+      { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" }
+    }
+  }
 end)
 
 -- Indentation
@@ -224,6 +231,7 @@ require('compe').setup {
   documentation = true,
   source = {
     path = true,
+    neorg = true,
     nvim_lsp = true,
     luasnip = true,
     buffer = false,
@@ -294,6 +302,17 @@ require('nvim-autopairs.completion.compe').setup({
   map_complete = true -- it will auto insert `(` after select function or method item
 })
 
+-- neorg
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+
+parser_configs.norg = {
+    install_info = {
+        url = "https://github.com/nvim-neorg/tree-sitter-norg",
+        files = { "src/parser.c", "src/scanner.cc" },
+        branch = "main"
+    },
+}
+
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup {
   autopairs = {
@@ -306,6 +325,46 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = true,
     disable = {'yaml'}
+  },
+  ensure_installed = {
+    "norg",
+    "go",
+    "yaml",
+    "bash",
+    "dockerfile",
+    "hcl",
+    "gomod",
+    "json",
+    "json5",
+    "lua",
+    "python",
+    "regex",
+    "toml",
+    "vim"
+  }
+}
+
+-- norg setup
+require('neorg').setup {
+  -- Tell Neorg what modules to load
+  load = {
+    ["core.defaults"] = {}, -- Load all the default modules
+    ["core.norg.concealer"] = {}, -- Allows for use of icons
+    ["core.integrations.telescope"] = {},
+    ["core.norg.completion"] = { config = { engine = "nvim-compe" } },
+    ["core.keybinds"] = { -- Configure core.keybinds
+      config = {
+        default_keybinds = true, -- Generate the default keybinds
+      }
+    },
+    ["core.norg.dirman"] = { -- Manage your directories with Neorg
+      config = {
+        workspaces = {
+          inbox = "~/notes/inbox",
+          seiko = "~/notes/seiko"
+        }
+      }
+    }
   },
 }
 
