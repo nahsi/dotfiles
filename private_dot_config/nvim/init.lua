@@ -22,6 +22,8 @@ require('packer').startup(function()
   use 'npxbr/glow.nvim' -- preview MD in buffer
   use 'norcalli/nvim-colorizer.lua' --  color higlighter in lua
 
+  use 'h-hg/fcitx.nvim'
+
   -- IDE
   -- highlight, edit, and navigate code
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
