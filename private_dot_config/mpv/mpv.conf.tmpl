@@ -6,31 +6,25 @@
 #                        ██║ ╚═╝ ██║██║      ╚████╔╝
 #                        ╚═╝     ╚═╝╚═╝       ╚═══╝
 #
-# -----------------------------------------------------------------------------
 # Video
-# -----------------------------------------------------------------------------
-gpu-api=vulkan
-hwdec=auto
-
-vulkan-async-compute=yes
-vulkan-async-transfer=yes
-{{- if (eq .chezmoi.hostname "pergamon") -}}
+{{ if (eq .chezmoi.hostname "pergamon") -}}
+hwdec=no
 opengl-pbo=yes
-
 deband=yes
 deband-iterations=4
 deband-threshold=20
 deband-grain=64
 deband-range=16
+{{ else }}
+hwdec=auto
 {{- end }}
 
 dither-depth=auto
 temporal-dither=yes
 
 # Processing
-# -----------------------------------------------------------------------------
-{{- if (eq .chezmoi.hostname "pergamon") -}}
-scale=ewa_lanczos
+{{ if (eq .chezmoi.hostname "pergamon") -}}
+scale=ewa_lanczossharp
 dscale=mitchell
 linear-downscaling=yes
 cscale=mitchell
@@ -38,19 +32,16 @@ sigmoid-upscaling=yes
 {{- end }}
 
 # Colorspace
-# -----------------------------------------------------------------------------
 target-prim=auto
 target-trc=auto
 # vf=format=colorlevels=full:colormatrix=auto
 video-output-levels=full
 
 # Cache
-# -----------------------------------------------------------------------------
 cache-pause-wait=5
 cache-pause-initial=yes
 
 # Audio
-# -----------------------------------------------------------------------------
 ao=alsa
 # af=lavfi="aformat=sample_fmts=s16|s32:channel_layouts=stereo"
 volume=100
@@ -59,7 +50,6 @@ volume=100
 alang=jpn,jp,eng,en,fre,fr,fn,fin,und,ger,de
 
 # Subs
-# -----------------------------------------------------------------------------
 # looks
 sub-font="Roboto Medium"
 sub-font-size=44
@@ -80,13 +70,11 @@ no-sub-visibility
 slang=eng,en,jpn,jp,fre,fr,fn,fin
 
 # OSD & UI
-# -----------------------------------------------------------------------------
 border=no
 osc=no
 title="mpv - ${media-title}"
 
 # misc
-# -----------------------------------------------------------------------------
 # watch later
 watch-later-directory="~/.cache/mpv/watch_later/"
 ignore-path-in-watch-later-config=yes
@@ -112,15 +100,13 @@ load-stats-overlay=no
 ytdl-format=bestvideo[height<=?1440][vcodec!*=vp9][vcodec!*=av01]+bestaudio/best
 
 # Profiles
-# -----------------------------------------------------------------------------
 [default]
 profile-cond=height < 1080
-# video-sync=display-resample
-# interpolation=yes
-# tscale=oversample
+video-sync=display-resample
+interpolation=yes
+tscale=oversample
 
 [4k]
 profile-cond=height > 1080
 deband=no
-# -----------------------------------------------------------------------------
 # END
