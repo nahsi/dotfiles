@@ -385,7 +385,9 @@ local servers = {
       staticcheck = true,
     },
   },
-  terraformls = {}
+  terraformls = {
+    cmd = {'tls', 'serve'}
+  }
 }
 
 local lsp_config = require'lspconfig'
