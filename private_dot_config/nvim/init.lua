@@ -340,7 +340,8 @@ require('nvim-treesitter.configs').setup {
     "python",
     "regex",
     "toml",
-    "vim"
+    "vim",
+    "ruby"
   }
 }
 
