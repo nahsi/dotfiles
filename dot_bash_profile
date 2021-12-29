@@ -2,7 +2,7 @@
 
 set -o vi
 
-export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.local/bin:${HOME}/go/bin"
 
 has() {
     [[ -z $1 ]] && return 1
