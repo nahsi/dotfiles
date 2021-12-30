@@ -32,6 +32,7 @@ require('packer').startup(function()
   use 'hrsh7th/nvim-compe' -- autocompletion plugin
   use 'L3MON4D3/LuaSnip' -- snippets plugin
   -- use 'fatih/vim-go' -- go developement plugin
+  use 'mhartington/formatter.nvim' -- multilanguage formatter
 
   -- UI to select things (files, grep results, open buffers...)
   use {
@@ -302,6 +303,68 @@ require('nvim-autopairs.completion.compe').setup({
   map_complete = true -- it will auto insert `(` after select function or method item
 })
 
+-- formatter
+require('formatter').setup({
+  filetype = {
+    javascript = {
+      function() 
+        return {
+          exe = "deno",
+          args = {"fmt", "--ext", "js", "-"},
+          stdin = true
+        }
+      end
+    },
+    json = {
+      function() 
+        return {
+          exe = "deno",
+          args = {"fmt", "--ext", "json", "-"},
+          stdin = true
+        }
+      end
+    },
+    markdown = {
+      function() 
+        return {
+          exe = "deno",
+          args = {"fmt", "--ext", "md", "-"},
+          stdin = true
+        }
+      end
+    },
+    terraform = {
+      function()
+        return {
+          exe = "terraform",
+          args = { "fmt", "-" },
+          stdin = true
+        }
+      end
+    },
+    hcl = {
+      function() 
+        return {
+          exe = "hclfmt",
+          args = {vim.api.nvim_buf_get_name(0)},
+          stdin = true
+        }
+      end
+    },
+    sh = {
+      function()
+        return {
+          exe = "shfmt",
+          args = { "-i", 2 },
+          stdin = true,
+        }
+      end,
+    },
+  }
+})
+
+vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>Format<cr>]], { noremap = true, silent = true })
+
 -- neorg
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
 
@@ -329,6 +392,8 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = {
     "norg",
     "go",
+    "typescript",
+    "javascript",
     "yaml",
     "bash",
     "dockerfile",
@@ -341,7 +406,7 @@ require('nvim-treesitter.configs').setup {
     "regex",
     "toml",
     "vim",
-    "ruby"
+    "ruby",
   }
 }
 
@@ -388,7 +453,8 @@ local servers = {
   },
   terraformls = {
     cmd = {'tls', 'serve'}
-  }
+  },
+  denols = {}
 }
 
 local lsp_config = require'lspconfig'
