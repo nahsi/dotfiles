@@ -72,7 +72,8 @@ vim.o.expandtab=true
 
 -- Hidden characters
 vim.o.list=true
-vim.o.listchars = 'trail:·,extends:◣,precedes:◢,nbsp:○'
+vim.o.listchars='trail:❚,extends:◣,precedes:◢,nbsp:○'
+vim.cmd [[match errorMsg '\s\+$']]
 
 -- Incremental live completion
 vim.o.inccommand = 'nosplit'
