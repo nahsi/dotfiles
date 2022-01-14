@@ -31,6 +31,9 @@ for f in base.theme.sh colors.theme.sh duru.theme.sh colors.sh fzf.sh; do
 done
 unset file
 
+# use BUILDKIT
+export DOCKER_BUILDKIT=1
+
 # japanese input
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

@@ -36,9 +36,9 @@ require('packer').startup(function()
 
   -- UI to select things (files, grep results, open buffers...)
   use {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     requires = {
-      { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } 
+      { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' }
     }
   }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -58,7 +58,7 @@ require('packer').startup(function()
 
   -- neorg
   use { "nvim-neorg/neorg",
-    requires = { 
+    requires = {
       { "nvim-lua/plenary.nvim" }, { "nvim-neorg/neorg-telescope" }
     }
   }
@@ -307,7 +307,7 @@ require('nvim-autopairs.completion.compe').setup({
 require('formatter').setup({
   filetype = {
     javascript = {
-      function() 
+      function()
         return {
           exe = "deno",
           args = {"fmt", "--ext", "js", "-"},
@@ -315,8 +315,17 @@ require('formatter').setup({
         }
       end
     },
+    typescript = {
+      function()
+        return {
+          exe = "deno",
+          args = {"fmt", "--ext", "ts", "-"},
+          stdin = true
+        }
+      end
+    },
     json = {
-      function() 
+      function()
         return {
           exe = "deno",
           args = {"fmt", "--ext", "json", "-"},
@@ -325,7 +334,7 @@ require('formatter').setup({
       end
     },
     markdown = {
-      function() 
+      function()
         return {
           exe = "deno",
           args = {"fmt", "--ext", "md", "-"},
@@ -343,7 +352,7 @@ require('formatter').setup({
       end
     },
     hcl = {
-      function() 
+      function()
         return {
           exe = "hclfmt",
           args = {vim.api.nvim_buf_get_name(0)},
@@ -439,7 +448,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = {
-  gopls = { 
+  gopls = {
     cmd = {'gopls', 'serve'},
     capabilities = capabilities,
     settings = {
@@ -454,11 +463,14 @@ local servers = {
   terraformls = {
     cmd = {'tls', 'serve'}
   },
-  denols = {}
+  denols = {
+    init_options = {
+      importMap = "import_map.json"
+    }
+  }
 }
 
 local lsp_config = require'lspconfig'
-
 for server, config in pairs(servers) do
     lsp_config[server].setup(config)
 end
