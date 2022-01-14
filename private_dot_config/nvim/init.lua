@@ -70,6 +70,10 @@ vim.o.softtabstop=2
 vim.o.shiftwidth=2
 vim.o.expandtab=true
 
+-- Hidden characters
+vim.o.list=true
+vim.o.listchars = 'trail:·,extends:◣,precedes:◢,nbsp:○'
+
 -- Incremental live completion
 vim.o.inccommand = 'nosplit'
 
