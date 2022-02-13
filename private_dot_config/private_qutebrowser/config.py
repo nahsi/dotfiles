@@ -10,7 +10,7 @@ config.source("colors.py")
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
 
-# bokmarklets
+# bookmark links
 c.aliases.update({ 'link': 'open https://links.service.consul/bookmarks/new?url={url}&auto_close'})
 
 # fonts

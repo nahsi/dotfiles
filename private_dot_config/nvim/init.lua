@@ -71,8 +71,11 @@ vim.o.shiftwidth=2
 vim.o.expandtab=true
 
 -- Hidden characters
-vim.o.list=true
-vim.o.listchars='trail:❚,extends:◣,precedes:◢,nbsp:○'
+vim.opt.listchars:append({
+  trail = '×',
+  -- tab = ':▸',
+})
+vim.opt.list = true
 vim.cmd [[match errorMsg '\s\+$']]
 
 -- Incremental live completion
@@ -151,6 +154,9 @@ vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_char_highlight = 'LineNr'
 vim.g.indent_blankline_show_trailing_blankline_indent = false
+vim.g.indent_blankline_show_current_context = true
+vim.g.indent_blankline_show_current_context_start = true
+vim.g.indent_blankline_context_patterns = {'^if', 'for', 'func', 'type'}
 
 -- code-minimap
 vim.g.minimap_auto_start = 0
