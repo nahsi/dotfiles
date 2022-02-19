@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+file=$1
+name=${file%.*}
+src=$(cat $file | grep SRC_URI= | cut -f 2 -d "\"" | cut -f 1 -d " ")
+
+tempdir=$(mktemp -d)
+trap 'popd &> /dev/null; rm -rf $tempdir' EXIT INT
+pushd $tempdir &> /dev/null
+
+PV=${name##*-}
+PN=${name%-*}
+eval wget -q $src
+tar -xzf v${PV}.tar.gz
+sed -Ee 's/^(.+) h1:.+$/\t"\1"/g' ${PN}-${PV}/go.sum
