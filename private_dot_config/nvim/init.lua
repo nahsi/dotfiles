@@ -85,7 +85,8 @@ vim.o.inccommand = 'nosplit'
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- Do not save when switching buffers
 vim.o.hidden = true
