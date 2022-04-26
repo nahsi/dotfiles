@@ -4,6 +4,7 @@ env:
   ENV: home
 
 windows:
+  - name: main
   - name: ansible
     layout: main-horizontal
     root: ~/repos/homelab/ansible
@@ -13,4 +14,9 @@ windows:
   - name: nomad
     layout: main-horizontal
     root: ~/repos/homelab/nomad
-  - name: main
+  - name: terraform
+    layout: main-horizontal
+    root: ~/repos/homelab/terraform
+  - name: observability
+    layout: main-horizontal
+    root: ~/repos/homelab/observability
