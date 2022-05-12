@@ -4,8 +4,8 @@ c.content.autoplay = False
 c.backend = "webengine"
 c.zoom.default = "125%"
 c.completion.height = "30%"
-c.url.start_pages = ["https://homer.service.consul"]
-c.url.default_page = "https://homer.service.consul"
+c.url.start_pages = ["https://nahsi.dev/#homelab"]
+c.url.default_page = "https://nahsi.dev/#homelab"
 config.source("colors.py")
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
