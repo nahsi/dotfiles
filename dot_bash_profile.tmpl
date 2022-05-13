@@ -75,7 +75,13 @@ export PY_COLORS=1
 export ANSIBLE_FORCE_COLOR=1
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+{{ if eq .chezmoi.hostname "pergamon" -}}
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCALE_FACTOR=1.3
+export QT_FONT_DPI=110
+{{ else if eq .chezmoi.hostname "miletos" -}}
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
+{{- end }}
 
 alias nnn="nnn -ec"
 alias www="nvim +VimwikiIndex"
