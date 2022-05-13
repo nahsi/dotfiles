@@ -14,7 +14,7 @@ exists() {
 }
 
 # init bash completions
-for p in nomad consul vault terraform packer; do
+for p in nomad consul vault terraform packer weed; do
     if has $p; then
         complete -C $p $p
     fi
@@ -44,7 +44,7 @@ export BAT_THEME="base16"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export HISTFILE="$HOME/.cache/bash_history"
-export HISTSIZE=10000
+export HISTSIZE=100000
 export HISTCONTROL="$HISTCONTROL erasedups:ignoreboth"
 
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -75,6 +75,7 @@ export PY_COLORS=1
 export ANSIBLE_FORCE_COLOR=1
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
 alias nnn="nnn -ec"
 alias www="nvim +VimwikiIndex"

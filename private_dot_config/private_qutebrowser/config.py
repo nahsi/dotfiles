@@ -2,7 +2,6 @@
 config.load_autoconfig()
 c.content.autoplay = False
 c.backend = "webengine"
-c.zoom.default = "125%"
 c.completion.height = "30%"
 c.url.start_pages = ["https://nahsi.dev/#homelab"]
 c.url.default_page = "https://nahsi.dev/#homelab"
