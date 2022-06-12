@@ -367,6 +367,15 @@ require("nvim-autopairs.completion.compe").setup({
 -- formatter
 require("formatter").setup({
   filetype = {
+    rust = {
+      function()
+        return {
+          exe = "rustfmt",
+          args = { "--emit=stdout" },
+          stdin = true,
+        }
+      end,
+    },
     javascript = {
       function()
         return {
@@ -553,6 +562,7 @@ local servers = {
       importMap = "import_map.json",
     },
   },
+  rust_analyzer = {},
 }
 
 local lsp_config = require("lspconfig")

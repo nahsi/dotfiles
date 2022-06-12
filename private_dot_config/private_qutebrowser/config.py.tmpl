@@ -8,6 +8,10 @@ c.url.default_page = "https://nahsi.dev/#homelab"
 c.spellcheck.languages = ["en-US", "ru-RU"]
 config.source("colors.py")
 
+{{ if eq .chezmoi.hostname "pergamon" -}}
+c.zoom.default = "150"
+{{- end }}
+
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
 
 # bookmark links
@@ -36,7 +40,7 @@ c.url.searchengines["gh"] = "https://github.com/search?q={}&type=Code"
 # keys
 config.bind("e", "spawn mpv {url}")
 config.bind("E", "hint links spawn mpv {hint-url}")
-config.bind(",p", "spawn --userscript qute-pass --mode pass")
+config.bind(",p", "spawn --userscript qute-bitwarden -p 'rofi -theme base16-tomorrow -dmenu -p \"Master Password\" -password -lines 0'  -d 'rofi -theme base16-tomorrow -dmenu -i -p Bitwarden'")
 config.bind(",e", "open-editor")
 config.bind("<Ctrl-e>", "open-editor", mode="insert")
 
