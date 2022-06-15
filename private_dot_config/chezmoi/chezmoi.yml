@@ -1,3 +1,4 @@
-encryption: "gpg"
-gpg:
-  recipient: "nahsi@airmail.cc"
+encryption: "age"
+age:
+  recipient: "age1vc9srqjfrvlj77e6ecp3wr7hpe8ly6mesygrmmmqru4m82mzq4fsjspa50"
+  identity: "/home/nahsi/.age/nahsi"

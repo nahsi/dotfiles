@@ -88,6 +88,7 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
 # source variables
 case $ENV in
     home) source ~/.local/home.env ;;
-    work) source ~/.local/work.env ;;
+    cinarra) source ~/.local/cinarra.env ;;
+    fluence) source ~/.local/fluence.env ;;
     *)
 esac
