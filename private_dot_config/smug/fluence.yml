@@ -1,0 +1,11 @@
+session: fluence
+root: ~/
+env:
+  ENV: fluence
+
+windows:
+  - name: main
+
+  - name: ops
+    layout: main-horizontal
+    root: ~/repos/fluence/ops
