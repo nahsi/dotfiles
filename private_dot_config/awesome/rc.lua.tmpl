@@ -6,7 +6,7 @@
 
 --]]
 
--- {{{ Required libraries
+-- [[[ Required libraries
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
 
@@ -21,9 +21,9 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi = require("beautiful.xresources").apply_dpi
--- }}}
+-- ]]]
 
--- {{{ Error handling
+-- [[[ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -54,9 +54,9 @@ do
 		in_error = false
 	end)
 end
--- }}}
+-- ]]]
 
--- {{{ Autostart windowless processes
+-- [[[ Autostart windowless processes
 
 -- This function will run once every time Awesome is started
 local function run_once(cmd_arr)
@@ -89,9 +89,9 @@ awful.spawn.with_shell(
 )
 --]]
 
--- }}}
+-- ]]]
 
--- {{{ Variable definitions
+-- [[[ Variable definitions
 
 local themes = {
 	"blackburn", -- 1
@@ -212,9 +212,9 @@ awful.util.tasklist_buttons = mytable.join(
 )
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
--- }}}
+-- ]]]
 
--- {{{ Screen
+-- [[[ Screen
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
 	-- Wallpaper
@@ -244,13 +244,13 @@ end)
 awful.screen.connect_for_each_screen(function(s)
 	beautiful.at_screen_connect(s)
 end)
--- }}}
+-- ]]]
 
--- {{{ Mouse bindings
+-- [[[ Mouse bindings
 root.buttons(mytable.join(awful.button({}, 4, awful.tag.viewnext), awful.button({}, 5, awful.tag.viewprev)))
--- }}}
+-- ]]]
 
--- {{{ Key bindings
+-- [[[ Key bindings
 globalkeys = mytable.join(
 	-- Take a screenshot
 	-- https://github.com/lcpz/dots/blob/master/bin/screenshot
@@ -647,9 +647,9 @@ clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
+-- ]]]
 
--- {{{ Rules
+-- [[[ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
 	-- All clients will match this rule.
@@ -694,9 +694,9 @@ awful.rules.rules = {
 	},
 	{ rule_any = { class = { "obs", "easyeffects" } }, properties = { tag = "6" } },
 }
--- }}}
+-- ]]]
 
--- {{{ Signals
+-- [[[ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
 	-- Set the windows at the slave,
@@ -773,4 +773,4 @@ end)
 
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
--- }}}
+-- ]]]
