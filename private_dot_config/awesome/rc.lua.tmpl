@@ -76,6 +76,8 @@ run_once({
 {{ if eq .chezmoi.hostname "pergamon" -}}
 	"hyperiond --desktop",
 	"deckmaster -brightness 30 -deck $HOME/.config/deckmaster/main.deck",
+{{ else if eq .chezmoi.hostname "miletos" -}}
+	"cbatticon",
 {{- end }}
 }) -- entries must be separated by commas
 

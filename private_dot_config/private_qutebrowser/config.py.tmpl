@@ -10,6 +10,8 @@ config.source("colors.py")
 
 {{ if eq .chezmoi.hostname "pergamon" -}}
 c.zoom.default = "150"
+{{ else if eq .chezmoi.hostname "miletos" -}}
+c.zoom.default = "130"
 {{- end }}
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
