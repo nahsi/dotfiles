@@ -8,7 +8,9 @@ c.url.default_page = "https://nahsi.dev/#homelab"
 c.spellcheck.languages = ["en-US", "ru-RU"]
 config.source("colors.py")
 
+{{ if eq .chezmoi.hostname "miletos" -}}
 c.zoom.default = "150"
+{{- end }}
 
 c.downloads.location.directory = "$XDG_DOWNLOAD_DIR"
 
