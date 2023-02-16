@@ -31,7 +31,6 @@ require("packer").startup(function()
   use("neovim/nvim-lspconfig")
   use("hrsh7th/nvim-compe") -- autocompletion plugin
   use("L3MON4D3/LuaSnip") -- snippets plugin
-  -- use 'fatih/vim-go' -- go developement plugin
   use("mhartington/formatter.nvim") -- multilanguage formatter
 
   -- UI to select things (files, grep results, open buffers...)
@@ -56,15 +55,6 @@ require("packer").startup(function()
   -- add git related info in the signs columns and popups
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
   use("wfxr/minimap.vim")
-
-  -- neorg
-  use({
-    "nvim-neorg/neorg",
-    requires = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-neorg/neorg-telescope" },
-    },
-  })
 end)
 
 -- Indentation
@@ -468,17 +458,6 @@ require("formatter").setup({
 
 vim.api.nvim_set_keymap("n", "<leader>f", [[<cmd>Format<cr>]], { noremap = true, silent = true })
 
--- neorg
-local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-
-parser_configs.norg = {
-  install_info = {
-    url = "https://github.com/nvim-neorg/tree-sitter-norg",
-    files = { "src/parser.c", "src/scanner.cc" },
-    branch = "main",
-  },
-}
-
 -- Treesitter configuration
 require("nvim-treesitter.configs").setup({
   autopairs = {
@@ -493,7 +472,9 @@ require("nvim-treesitter.configs").setup({
     disable = { "yaml" },
   },
   ensure_installed = {
-    "norg",
+    "markdown",
+    "markdown_inline",
+    "rust",
     "go",
     "typescript",
     "javascript",
@@ -501,6 +482,7 @@ require("nvim-treesitter.configs").setup({
     "bash",
     "dockerfile",
     "hcl",
+    "terraform",
     "gomod",
     "json",
     "json5",
@@ -510,30 +492,6 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "vim",
     "ruby",
-  },
-})
-
--- norg setup
-require("neorg").setup({
-  -- Tell Neorg what modules to load
-  load = {
-    ["core.defaults"] = {}, -- Load all the default modules
-    ["core.norg.concealer"] = {}, -- Allows for use of icons
-    ["core.integrations.telescope"] = {},
-    ["core.norg.completion"] = { config = { engine = "nvim-compe" } },
-    ["core.keybinds"] = { -- Configure core.keybinds
-      config = {
-        default_keybinds = true, -- Generate the default keybinds
-      },
-    },
-    ["core.norg.dirman"] = { -- Manage your directories with Neorg
-      config = {
-        workspaces = {
-          inbox = "~/notes/inbox",
-          seiko = "~/notes/seiko",
-        },
-      },
-    },
   },
 })
 

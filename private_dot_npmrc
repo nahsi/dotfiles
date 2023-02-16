@@ -1,0 +1,2 @@
+//npm.fluence.dev/:_authToken=$NPM_FLUENCE_TOKEN
+prefix=${HOME}/.npm

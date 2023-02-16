@@ -2,7 +2,9 @@
 
 set -o vi
 
-export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.local/bin:${HOME}/go/bin"
+export NPM="${HOME}/.npm/"
+export NODE_PATH="$NPM/lib/node_modules:$NODE_PATH"
+export PATH="${HOME}/.cargo/bin:${PATH}:${HOME}/.local/bin:${HOME}/go/bin:${NPM}/bin"
 
 has() {
     [[ -z $1 ]] && return 1
