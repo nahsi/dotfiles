@@ -11,12 +11,3 @@ windows:
     commands:
       - source ~/.virtualenvs/homelab/ansible/bin/activate
       - clear
-  - name: nomad
-    layout: main-horizontal
-    root: ~/repos/homelab/nomad
-  - name: terraform
-    layout: main-horizontal
-    root: ~/repos/homelab/terraform
-  - name: observability
-    layout: main-horizontal
-    root: ~/repos/homelab/observability
